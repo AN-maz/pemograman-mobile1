@@ -38,10 +38,10 @@ Proyek ini merupakan tugas besar mata kuliah **Pemrograman Mobile 1** yang diker
 ![Sistem Internal](UC/sistem-internal.png)
 
 ### 2. Sistem Operasional
-![Sistem Operasional](UC/Sistem-operasional.png)
+![Sistem Operasional](UC/sistem-operasional.png)
 
 ### 3. Sistem Visit Track
 ![Sistem Visit Track](UC/sistem-visit-track.png)
 
 ### 4. Sistem Super Apps
-![Sistem Super Apps](UC/Sistem-super-apps.png)
+![Sistem Super Apps](UC/sistem-super-apps.png)
