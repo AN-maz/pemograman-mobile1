@@ -40,6 +40,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -55,4 +58,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-firestore")
 
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+
+    // 2. BARU PANGGIL FIREBASE AUTH (Biarkan seperti ini, tanpa versi)
+    implementation("com.google.firebase:firebase-auth")
 }
