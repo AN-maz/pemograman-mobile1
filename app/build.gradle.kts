@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -46,4 +49,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+
+    // 2. BARU PANGGIL FIREBASE AUTH (Biarkan seperti ini, tanpa versi)
+    implementation("com.google.firebase:firebase-auth")
 }
