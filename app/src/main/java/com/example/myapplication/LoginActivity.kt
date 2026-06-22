@@ -56,7 +56,52 @@ class LoginActivity : AppCompatActivity() {
 
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Autentikasi Berhasil!", Toast.LENGTH_SHORT).show()
-                    // TODO: Arahkan ke Dashboard sesuai divisi
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "Autentikasi Berhasil!", Toast.LENGTH_SHORT).show()
+
+                        // 1. Ambil UID pengguna yang sedang login
+                        val userId = auth.currentUser?.uid
+
+                        if (userId != null) {
+                            // Tampilkan loading kembali saat mengambil data dari database
+                            binding.progressBar.visibility = View.VISIBLE
+
+                            // 2. Akses Cloud Firestore ke koleksi "Pegawai" berdasarkan ID dokumen (UID)
+                            val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                            db.collection("Pegawai").document(userId).get()
+                                .addOnSuccessListener { document ->
+                                    binding.progressBar.visibility = View.GONE
+
+                                    if (document != null && document.exists()) {
+                                        // 3. Ambil string data dari field "divisi"
+                                        val divisi = document.getString("divisi")
+
+                                        // 4. Logika Routing menggunakan "when" sesuai Class Diagram
+                                        val intent = when (divisi) {
+                                            "Teknisi" -> Intent(this, TeknisiActivity::class.java)
+                                            "Logistik" -> Intent(this, LogistikActivity::class.java)
+                                            "Finance" -> Intent(this, FinanceActivity::class.java)
+                                            "NOC" -> Intent(this, NocActivity::class.java)
+                                            "Customer Service" -> Intent(this, CsActivity::class.java)
+                                            else -> null
+                                        }
+
+                                        if (intent != null) {
+                                            startActivity(intent)
+                                            finish() // Menutup LoginActivity agar tidak bisa di-back kembali
+                                        } else {
+                                            Toast.makeText(this, "Divisi tidak dikenali!", Toast.LENGTH_SHORT).show()
+                                        }
+                                    } else {
+                                        Toast.makeText(this, "Data pegawai tidak ditemukan di database!", Toast.LENGTH_LONG).show()
+                                    }
+                                }
+                                .addOnFailureListener { exception ->
+                                    binding.progressBar.visibility = View.GONE
+                                    Toast.makeText(this, "Gagal mengambil data: ${exception.message}", Toast.LENGTH_LONG).show()
+                                }
+                        }
+                    }
                 } else {
                     Toast.makeText(
                         this,

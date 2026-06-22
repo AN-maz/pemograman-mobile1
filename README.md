@@ -45,3 +45,36 @@ Proyek ini merupakan tugas besar mata kuliah **Pemrograman Mobile 1** yang diker
 
 ### 4. Sistem Super Apps
 ![Sistem Super Apps](UC/sistem-super-apps.png)
+
+---
+
+### Standar Penamaan Branch
+
+#### - `feature/nama-fitur` (untuk membuat fitur baru)
+#### - `bugfix/nama-bug` (untuk memperbaiki error)
+#### - `chore/nama-tugas` (untuk tugas teknis non-fitur, seperti pengaturan library)
+
+### Siklus Kerja Member
+Setiap kali ingin membuat fitur baru, alurnya:
+#### Langkah A: Pindah ke branch `testing` (bukan `main`), lalu ambil kode terbaru
+
+```bash
+git checkout testing
+git pull origin testing
+```
+
+#### Langkah B: Buat branch fitur baru dari branch `testing` tersebut.
+```bash
+git checkout -b fitur/login
+```
+
+#### Langkah C: Coding di Android Studio sampai fiturnya selesai. Jika sudah selesai, lakukan `commit`.
+```bash
+git add .
+git commit -m "menyelesaikan fitur login"
+```
+
+#### Langkah D: Push branch fitur tersebut ke GitHub.
+```bash
+git push origin fitur/login
+```
