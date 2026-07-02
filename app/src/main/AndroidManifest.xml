@@ -11,14 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+
+        <!-- LoginActivity tetap punya intent-filter agar terbuka pertama kali -->
+        <activity android:name=".LoginActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <!-- MainActivity HAPUS intent-filter dari sini -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
         </activity>
     </application>
 
