@@ -30,7 +30,15 @@
         <activity android:name=".CekOdpActivity" android:exported="false" />
         <activity android:name=".MintaBarangActivity" android:exported="false" />
         <activity android:name=".InstalasiActivity" android:exported="false" />
-<!--        <activity android:name=".LogistikActivity" />-->
+
+
+        <activity android:name=".LogistikActivity" />
+        <activity android:name=".SiapBarangActivity" android:exported="false" />
+        <activity android:name=".BeliBarangActivity" android:exported="false" />
+
+        <activity android:name=".FinanceActivity" android:exported="false" />
+        <activity android:name=".ApprovalPrActivity" android:exported="false" />
+        <activity android:name=".ValidasiPembayaranActivity" android:exported="false" />
 <!--        <activity android:name=".FinanceActivity" />-->
 <!--        <activity android:name=".NocActivity" />-->
 <!--        <activity android:name=".CsActivity" />-->

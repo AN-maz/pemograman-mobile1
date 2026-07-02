@@ -41,7 +41,7 @@
                 android:id="@+id/tvLogoCifo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CIFORMAXIGEN"
+                android:text="PT. CIPUR"
                 android:textColor="#1558D6"
                 android:textSize="36sp"
                 android:textStyle="bold"
