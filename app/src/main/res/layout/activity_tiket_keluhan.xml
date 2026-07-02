@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buat Tiket Keluhan"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <EditText
+        android:id="@+id/etIdPelanggan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID Pelanggan (contoh: PLG-001)"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        android:layout_marginTop="24dp" />
+
+    <EditText
+        android:id="@+id/etKategori"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Kategori (Tagihan / Jaringan)"
+        app:layout_constraintTop_toBottomOf="@+id/etIdPelanggan"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/etKeluhan"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="Detail Keluhan"
+        android:gravity="top|start"
+        android:inputType="textMultiLine"
+        app:layout_constraintTop_toBottomOf="@+id/etKategori"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnKirimTiket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kirim Tiket Keluhan"
+        app:layout_constraintTop_toBottomOf="@+id/etKeluhan"
+        android:layout_marginTop="24dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

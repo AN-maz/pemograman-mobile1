@@ -39,6 +39,14 @@
         <activity android:name=".FinanceActivity" android:exported="false" />
         <activity android:name=".ApprovalPrActivity" android:exported="false" />
         <activity android:name=".ValidasiPembayaranActivity" android:exported="false" />
+
+        <activity android:name=".NocActivity" android:exported="false" />
+        <activity android:name=".AktivasiNocActivity" android:exported="false" />
+
+        <activity android:name=".CsActivity" android:exported="false" />
+        <activity android:name=".CariUpdatePelangganActivity" android:exported="false" />
+        <activity android:name=".TiketKeluhanActivity" android:exported="false" />
+        <activity android:name=".BantuanTeknisActivity" android:exported="false" />
 <!--        <activity android:name=".FinanceActivity" />-->
 <!--        <activity android:name=".NocActivity" />-->
 <!--        <activity android:name=".CsActivity" />-->
