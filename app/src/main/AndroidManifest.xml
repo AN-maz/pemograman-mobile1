@@ -25,6 +25,15 @@
             android:name=".MainActivity"
             android:exported="false">
         </activity>
+
+        <activity android:name=".TeknisiActivity" android:exported="false" />
+        <activity android:name=".CekOdpActivity" android:exported="false" />
+        <activity android:name=".MintaBarangActivity" android:exported="false" />
+        <activity android:name=".InstalasiActivity" android:exported="false" />
+<!--        <activity android:name=".LogistikActivity" />-->
+<!--        <activity android:name=".FinanceActivity" />-->
+<!--        <activity android:name=".NocActivity" />-->
+<!--        <activity android:name=".CsActivity" />-->
     </application>
 
 </manifest>
