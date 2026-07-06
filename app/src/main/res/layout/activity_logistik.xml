@@ -19,20 +19,31 @@
         android:layout_marginTop="32dp"/>
 
     <Button
+        android:id="@+id/btnMenuMonitoring"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="📊  Monitoring Gudang &amp; Status"
+        android:gravity="start|center_vertical"
+        android:paddingStart="20dp"
+        android:backgroundTint="#2196F3"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
+        android:layout_marginTop="40dp" />
+
+    <Button
         android:id="@+id/btnMenuSiapBarang"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="📦  Siapkan Perangkat (Manifes)"
+        android:text="📦  Proses Penyerahan Perangkat"
         android:gravity="start|center_vertical"
         android:paddingStart="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
-        android:layout_marginTop="40dp" />
+        app:layout_constraintTop_toBottomOf="@+id/btnMenuMonitoring"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/btnMenuBeliBarang"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="🛒  Purchase Request (PR)"
+        android:text="🛒  Buat Purchase Request (PR)"
         android:gravity="start|center_vertical"
         android:paddingStart="20dp"
         app:layout_constraintTop_toBottomOf="@+id/btnMenuSiapBarang"

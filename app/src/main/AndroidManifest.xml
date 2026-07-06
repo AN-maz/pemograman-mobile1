@@ -35,6 +35,7 @@
         <activity android:name=".LogistikActivity" />
         <activity android:name=".SiapBarangActivity" android:exported="false" />
         <activity android:name=".BeliBarangActivity" android:exported="false" />
+        <activity android:name=".MonitoringLogistikActivity" android:exported="false" />
 
         <activity android:name=".FinanceActivity" android:exported="false" />
         <activity android:name=".ApprovalPrActivity" android:exported="false" />
