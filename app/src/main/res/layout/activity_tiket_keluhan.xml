@@ -17,27 +17,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <EditText
-        android:id="@+id/etIdPelanggan"
+    <!-- Kolom Pencarian Pintar -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPelanggan"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ID Pelanggan (contoh: PLG-001)"
+        android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        android:layout_marginTop="24dp" />
+        android:hint="Cari Pelanggan (Ketik Nama / ID)">
+
+        <AutoCompleteTextView
+            android:id="@+id/etPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:completionThreshold="1" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
         android:id="@+id/etKategori"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Kategori (Tagihan / Jaringan)"
-        app:layout_constraintTop_toBottomOf="@+id/etIdPelanggan"
+        android:hint="Kategori (contoh: Jaringan Lemot / Tagihan)"
+        app:layout_constraintTop_toBottomOf="@+id/tilPelanggan"
         android:layout_marginTop="16dp" />
 
     <EditText
         android:id="@+id/etKeluhan"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:hint="Detail Keluhan"
+        android:hint="Deskripsikan detail keluhan pelanggan..."
         android:gravity="top|start"
         android:inputType="textMultiLine"
         app:layout_constraintTop_toBottomOf="@+id/etKategori"
