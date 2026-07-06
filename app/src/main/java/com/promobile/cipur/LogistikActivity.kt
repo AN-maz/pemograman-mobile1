@@ -24,6 +24,10 @@ class LogistikActivity : AppCompatActivity() {
             insets
         }
 
+        binding.btnMenuMonitoring.setOnClickListener {
+            startActivity(Intent(this, MonitoringLogistikActivity::class.java))
+        }
+
         binding.btnMenuSiapBarang.setOnClickListener {
             startActivity(Intent(this, SiapBarangActivity::class.java))
         }

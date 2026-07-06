@@ -2,6 +2,7 @@ package com.promobile.cipur
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ class InstalasiActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityInstalasiBinding
     private val db = FirebaseFirestore.getInstance()
+    private val listTiketOpen = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +29,15 @@ class InstalasiActivity : AppCompatActivity() {
             insets
         }
 
+        loadTiketTerbuka()
+
         binding.btnSelesaiInstalasi.setOnClickListener {
             val nomorTiket = binding.etNoTiket.text.toString().trim()
             val laporanInstalasi = binding.etLaporan.text.toString().trim()
 
+            // Exceptional Flow 3E: Data belum lengkap
             if (nomorTiket.isEmpty() || laporanInstalasi.length < 10) {
-                Toast.makeText(this, "Peringatan: Data Laporan Instalasi Kurang Lengkap (Minimal 10 Karakter)!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Data belum lengkap! Laporan minimal 10 karakter.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -40,26 +45,41 @@ class InstalasiActivity : AppCompatActivity() {
         }
     }
 
+    private fun loadTiketTerbuka() {
+        // Hanya menarik tiket yang masih terbuka (Open)
+        db.collection("database_operasional")
+            .whereEqualTo("statusPekerjaan", "Open")
+            .get()
+            .addOnSuccessListener { documents ->
+                listTiketOpen.clear()
+                for (doc in documents) {
+                    listTiketOpen.add(doc.id)
+                }
+
+                val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, listTiketOpen)
+                binding.etNoTiket.setAdapter(adapter)
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Gagal memuat daftar tiket", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun prosesPenyelesaianTiket(tiketId: String, laporan: String) {
-        binding.progressBar.visibility = View.VISIBLE
         binding.btnSelesaiInstalasi.isEnabled = false
 
         val updateDataOperasional = hashMapOf(
             "statusPekerjaan" to "Selesai",
             "laporanTeknisi" to laporan,
-            "antreanAktivasiNoc" to true
+            "antreanAktivasiNoc" to true // Meneruskan ke NOC (UC_OP08 Trigger)
         )
 
         db.collection("database_operasional").document(tiketId)
-            .set(updateDataOperasional)
+            .update(updateDataOperasional as Map<String, Any>)
             .addOnSuccessListener {
-                binding.progressBar.visibility = View.GONE
-                binding.btnSelesaiInstalasi.isEnabled = true
-                Toast.makeText(this, "Sukses! Tiket $tiketId berhasil ditutup dan diteruskan ke NOC.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Sukses! Instalasi Selesai, diteruskan ke NOC.", Toast.LENGTH_LONG).show()
                 finish()
             }
             .addOnFailureListener { e ->
-                binding.progressBar.visibility = View.GONE
                 binding.btnSelesaiInstalasi.isEnabled = true
                 Toast.makeText(this, "Gagal memperbarui status: ${e.message}", Toast.LENGTH_SHORT).show()
             }

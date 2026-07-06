@@ -1,6 +1,7 @@
 package com.promobile.cipur
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,11 @@ class TiketKeluhanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTiketKeluhanBinding
     private val db = FirebaseFirestore.getInstance()
 
+    // Untuk menyimpan daftar "ID - Nama"
+    private val listPelangganDisplay = mutableListOf<String>()
+    // Untuk mengingat ID asli yang dipilih CS
+    private var selectedIdPelanggan = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,34 +32,80 @@ class TiketKeluhanActivity : AppCompatActivity() {
             insets
         }
 
+        // 1. Muat data pelanggan untuk Dropdown
+        loadDataPelanggan()
+
+        // 2. Tangkap kejadian saat CS mengklik salah satu nama di dropdown
+        binding.etPelanggan.setOnItemClickListener { parent, _, position, _ ->
+            val textTerpilih = parent.getItemAtPosition(position).toString()
+
+            // Teks berbentuk "PLG-001 - Budi", kita potong dan ambil sebelum " -"
+            selectedIdPelanggan = textTerpilih.substringBefore(" -")
+        }
+
+        // 3. Tombol Kirim Tiket
         binding.btnKirimTiket.setOnClickListener {
-            val idPlg = binding.etIdPelanggan.text.toString().trim()
+            val inputText = binding.etPelanggan.text.toString()
             val kategori = binding.etKategori.text.toString().trim()
             val keluhan = binding.etKeluhan.text.toString().trim()
 
-            if (idPlg.isEmpty() || kategori.isEmpty() || keluhan.isEmpty()) {
-                Toast.makeText(this, "Informasi tidak lengkap, mohon lengkapi data", Toast.LENGTH_SHORT).show()
+            // Validasi apakah CS benar-benar memilih dari daftar, bukan asal ngetik
+            if (selectedIdPelanggan.isEmpty() || !inputText.contains(selectedIdPelanggan)) {
+                Toast.makeText(this, "Silakan pilih nama pelanggan dari daftar saran (dropdown)", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
-            buatTiketOtomatis(idPlg, kategori, keluhan)
+            if (kategori.isEmpty() || keluhan.isEmpty()) {
+                Toast.makeText(this, "Kategori dan detail keluhan tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            buatTiketOtomatis(selectedIdPelanggan, kategori, keluhan)
         }
     }
 
+    private fun loadDataPelanggan() {
+        db.collection("database_pelanggan").get()
+            .addOnSuccessListener { documents ->
+                listPelangganDisplay.clear()
+
+                for (doc in documents) {
+                    val nama = doc.getString("nama") ?: "Tanpa Nama"
+                    val id = doc.id
+                    // Gabungkan ID dan Nama agar mudah dicari CS
+                    listPelangganDisplay.add("$id - $nama")
+                }
+
+                // Masukkan daftar ke dalam AutoCompleteTextView
+                val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, listPelangganDisplay)
+                binding.etPelanggan.setAdapter(adapter)
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Gagal memuat daftar pelanggan", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun buatTiketOtomatis(idPlg: String, kategori: String, keluhan: String) {
+        binding.btnKirimTiket.isEnabled = false // Matikan tombol agar tidak dobel klik
+
         val noTiket = "CMP-${System.currentTimeMillis().toString().takeLast(5)}"
         val tiketData = hashMapOf(
             "idPelanggan" to idPlg,
             "kategori" to kategori,
             "keluhan" to keluhan,
-            "status" to "Open"
+            "status" to "Open",
+            "timestamp" to System.currentTimeMillis()
         )
 
         db.collection("database_tiket").document(noTiket)
             .set(tiketData)
             .addOnSuccessListener {
-                Toast.makeText(this, "Tiket Dibuat: $noTiket", Toast.LENGTH_LONG).show()
-                finish()
+                Toast.makeText(this, "Sukses! Tiket $noTiket berhasil dibuat.", Toast.LENGTH_LONG).show()
+                finish() // Kembali ke dashboard CS
+            }
+            .addOnFailureListener {
+                binding.btnKirimTiket.isEnabled = true
+                Toast.makeText(this, "Gagal membuat tiket, periksa koneksi", Toast.LENGTH_SHORT).show()
             }
     }
 }

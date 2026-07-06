@@ -7,49 +7,100 @@
     android:layout_height="match_parent"
     android:padding="24dp">
 
-    <EditText
-        android:id="@+id/etIdPelanggan"
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bantuan Teknis &amp; Pemantauan"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Kolom Pencarian Pintar (Sama seperti Tiket Keluhan) -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPelanggan"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ID Pelanggan untuk Cek Koneksi"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        android:hint="Cari Pelanggan (Ketik Nama / ID)">
+
+        <AutoCompleteTextView
+            android:id="@+id/etPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:completionThreshold="1" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnCekKoneksi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cek Status Perangkat"
-        app:layout_constraintTop_toBottomOf="@+id/etIdPelanggan"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintTop_toBottomOf="@+id/tilPelanggan"
+        android:layout_marginTop="16dp" />
 
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="wrap_content"
+    <!-- Area Hasil Pemantauan -->
+    <LinearLayout
+        android:id="@+id/layoutStatus"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Status Koneksi: Menunggu Pengecekan"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="#F5F5F5"
+        android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@+id/btnCekKoneksi"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="24dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hasil Diagnosis Sistem:"
+            android:textSize="14sp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menunggu..."
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <!-- Tombol Aksi Lanjutan -->
     <Button
         android:id="@+id/btnRestart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Restart Perangkat Jarak Jauh"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/tvStatus"
+        app:layout_constraintTop_toBottomOf="@+id/layoutStatus"
         android:layout_marginTop="24dp" />
+
+    <Button
+        android:id="@+id/btnTutupLaporan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tutup Laporan (Layanan Normal)"
+        android:visibility="gone"
+        android:backgroundTint="#4CAF50"
+        app:layout_constraintTop_toBottomOf="@+id/btnRestart"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/btnTiketTeknisi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Buat Tiket Fisik ke Teknisi"
+        android:text="Buat Tiket Gangguan Fisik (Teknisi)"
         android:visibility="gone"
         android:backgroundTint="#F44336"
-        app:layout_constraintTop_toBottomOf="@+id/btnRestart"
+        app:layout_constraintTop_toBottomOf="@+id/btnTutupLaporan"
         android:layout_marginTop="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
