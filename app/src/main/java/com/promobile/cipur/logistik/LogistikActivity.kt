@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.logistik
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,16 +6,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.promobile.cipur.databinding.ActivityLogistikBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.LogistikActivityMainBinding
 
 class LogistikActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLogistikBinding
+    private lateinit var binding: LogistikActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityLogistikBinding.inflate(layoutInflater)
+        binding = LogistikActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

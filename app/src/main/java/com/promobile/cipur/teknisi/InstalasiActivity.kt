@@ -1,7 +1,6 @@
-package com.promobile.cipur
+package com.promobile.cipur.teknisi
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -9,18 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
-import com.promobile.cipur.databinding.ActivityInstalasiBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.TeknisiActivityInstalasiBinding
 
 class InstalasiActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityInstalasiBinding
+    private lateinit var binding: TeknisiActivityInstalasiBinding
     private val db = FirebaseFirestore.getInstance()
     private val listTiketOpen = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityInstalasiBinding.inflate(layoutInflater)
+        binding = TeknisiActivityInstalasiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -56,7 +56,8 @@ class InstalasiActivity : AppCompatActivity() {
                     listTiketOpen.add(doc.id)
                 }
 
-                val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, listTiketOpen)
+                val adapter =
+                    ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, listTiketOpen)
                 binding.etNoTiket.setAdapter(adapter)
             }
             .addOnFailureListener {

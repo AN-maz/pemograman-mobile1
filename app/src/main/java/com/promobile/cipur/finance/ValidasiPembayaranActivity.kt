@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.finance
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -8,11 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
-import com.promobile.cipur.databinding.ActivityValidasiPembayaranBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.FinanceActivityValidasiPembayaranBinding
 
 class ValidasiPembayaranActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityValidasiPembayaranBinding
+    private lateinit var binding: FinanceActivityValidasiPembayaranBinding
     private val db = FirebaseFirestore.getInstance()
     private val listDataTagihan = mutableListOf<Pair<String, Map<String, Any>>>()
     private var selectedTagihanId: String? = null
@@ -20,7 +21,7 @@ class ValidasiPembayaranActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityValidasiPembayaranBinding.inflate(layoutInflater)
+        binding = FinanceActivityValidasiPembayaranBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

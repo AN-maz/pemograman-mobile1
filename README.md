@@ -26,7 +26,7 @@ Proyek ini merupakan tugas besar mata kuliah **Pemrograman Mobile 1** yang diker
 
 - Android Studio
 - Kotlin
-- MySQL / Firebase
+- Firebase
 - XML Layout
 - Git & GitHub
 

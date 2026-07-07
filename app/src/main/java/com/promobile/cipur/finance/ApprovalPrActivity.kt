@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.finance
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -8,11 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
-import com.promobile.cipur.databinding.ActivityApprovalPrBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.FinanceActivityApprovalPrBinding
 
 class ApprovalPrActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityApprovalPrBinding
+    private lateinit var binding: FinanceActivityApprovalPrBinding
     private val db = FirebaseFirestore.getInstance()
     private val listDataPr = mutableListOf<Pair<String, Map<String, Any>>>()
     private var selectedDocId: String? = null
@@ -20,7 +21,7 @@ class ApprovalPrActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityApprovalPrBinding.inflate(layoutInflater)
+        binding = FinanceActivityApprovalPrBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

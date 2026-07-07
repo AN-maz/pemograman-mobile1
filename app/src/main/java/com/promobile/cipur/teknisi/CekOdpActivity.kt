@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.teknisi
 
 import android.os.Bundle
 import android.view.View
@@ -8,18 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
-import com.promobile.cipur.databinding.ActivityCekOdpBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.TeknisiActivityCekOdpBinding
 
 class CekOdpActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityCekOdpBinding
+    private lateinit var binding: TeknisiActivityCekOdpBinding
     private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityCekOdpBinding.inflate(layoutInflater)
+        binding = TeknisiActivityCekOdpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

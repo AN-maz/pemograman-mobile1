@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.logistik
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -6,17 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
-import com.promobile.cipur.databinding.ActivityMonitoringLogistikBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.LogistikActivityMonitoringBinding
+import java.lang.StringBuilder
 
 class MonitoringLogistikActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMonitoringLogistikBinding
+    private lateinit var binding: LogistikActivityMonitoringBinding
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityMonitoringLogistikBinding.inflate(layoutInflater)
+        binding = LogistikActivityMonitoringBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -40,7 +42,7 @@ class MonitoringLogistikActivity : AppCompatActivity() {
                     return@addOnSuccessListener
                 }
 
-                val sb = java.lang.StringBuilder()
+                val sb = StringBuilder()
                 for (doc in documents) {
                     val manifes = doc.getString("nomorManifes") ?: "-"
                     val material = doc.getString("namaMaterial") ?: "-"
@@ -64,7 +66,7 @@ class MonitoringLogistikActivity : AppCompatActivity() {
                     return@addOnSuccessListener
                 }
 
-                val sb = java.lang.StringBuilder()
+                val sb = StringBuilder()
                 for (doc in documents) {
                     val barang = doc.getString("rincianBarang") ?: "-"
                     val status = doc.getString("statusApproval") ?: "-"
@@ -86,7 +88,7 @@ class MonitoringLogistikActivity : AppCompatActivity() {
                     return@addOnSuccessListener
                 }
 
-                val sb = java.lang.StringBuilder()
+                val sb = StringBuilder()
                 for (doc in documents) {
                     val namaBarang = doc.id
                     val stok = doc.getLong("stok") ?: 0

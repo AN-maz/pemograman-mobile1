@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F7FC"
-    tools:context=".LoginActivity">
+    tools:context=".auth.LoginActivity">
 
     <!-- Latar Belakang Aksen Atas (Biru Korporat) -->
     <View

@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.noc
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,15 +6,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.promobile.cipur.databinding.ActivityCsBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.NocActivityMainBinding
 
-class CsActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCsBinding
+class NocActivity : AppCompatActivity() {
+
+    private lateinit var binding: NocActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityCsBinding.inflate(layoutInflater)
+        binding = NocActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -23,14 +25,8 @@ class CsActivity : AppCompatActivity() {
             insets
         }
 
-        binding.btnMenuCariUpdate.setOnClickListener {
-            startActivity(Intent(this, CariUpdatePelangganActivity::class.java))
-        }
-        binding.btnMenuKeluhan.setOnClickListener {
-            startActivity(Intent(this, TiketKeluhanActivity::class.java))
-        }
-        binding.btnMenuBantuan.setOnClickListener {
-            startActivity(Intent(this, BantuanTeknisActivity::class.java))
+        binding.btnMenuAktivasi.setOnClickListener {
+            startActivity(Intent(this, AktivasiNocActivity::class.java))
         }
     }
 }

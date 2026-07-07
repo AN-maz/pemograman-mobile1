@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.cs
 
 import android.os.Bundle
 import android.text.Editable
@@ -12,24 +12,25 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
-import com.promobile.cipur.databinding.ActivityCariUpdatePelangganBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.CsActivityCariUpdateBinding
 
 class CariUpdatePelangganActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityCariUpdatePelangganBinding
+    private lateinit var binding: CsActivityCariUpdateBinding
     private val db = FirebaseFirestore.getInstance()
 
-    private val masterListPelanggan = mutableListOf<Pelanggan>() // Penyimpanan Utama
-    private val displayListPelanggan = mutableListOf<Pelanggan>() // Ditampilkan di Tabel
+    private val masterListPelanggan = mutableListOf<Pelanggan>()
+    private val displayListPelanggan = mutableListOf<Pelanggan>() 
     private lateinit var adapter: PelangganAdapter
 
     private var currentIdPelanggan = ""
-    private var isFormatting = false // Pencegah loop pada TextWatcher
+    private var isFormatting = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityCariUpdatePelangganBinding.inflate(layoutInflater)
+        binding = CsActivityCariUpdateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -37,21 +38,15 @@ class CariUpdatePelangganActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        // 1. Set Input Filter agar semua ketikan otomatis Kapital
         binding.etSearch.filters = arrayOf(InputFilter.AllCaps())
-
-        // 2. Persiapan RecyclerView
         adapter = PelangganAdapter(displayListPelanggan) { pelangganTerpilih ->
             tampilkanFormUpdate(pelangganTerpilih)
         }
         binding.rvPelanggan.layoutManager = LinearLayoutManager(this)
         binding.rvPelanggan.adapter = adapter
 
-        // 3. Tarik semua data pelanggan saat halaman baru dibuka (Preload)
         loadSemuaDataPelanggan()
 
-        // 4. Deteksi ketikan secara Real-time
         binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -61,12 +56,11 @@ class CariUpdatePelangganActivity : AppCompatActivity() {
 
                 val teks = s.toString()
 
-                // Jika ketikan pertama adalah ANGKA, otomatis pasangkan "PLG-"
                 if (teks.isNotEmpty() && teks[0].isDigit()) {
                     isFormatting = true
                     val teksOtomatis = "PLG-$teks"
                     binding.etSearch.setText(teksOtomatis)
-                    binding.etSearch.setSelection(teksOtomatis.length) // Kursor ke paling kanan
+                    binding.etSearch.setSelection(teksOtomatis.length)
                     isFormatting = false
                     filterData(teksOtomatis)
                 } else {
@@ -75,7 +69,6 @@ class CariUpdatePelangganActivity : AppCompatActivity() {
             }
         })
 
-        // 5. Tombol Update
         binding.btnUpdate.setOnClickListener {
             simpanPembaruanData()
         }
@@ -97,7 +90,6 @@ class CariUpdatePelangganActivity : AppCompatActivity() {
                     masterListPelanggan.add(pelanggan)
                 }
 
-                // Tampilkan semua di awal
                 displayListPelanggan.addAll(masterListPelanggan)
                 adapter.notifyDataSetChanged()
             }
@@ -105,8 +97,6 @@ class CariUpdatePelangganActivity : AppCompatActivity() {
                 Toast.makeText(this, "Gagal memuat data pelanggan", Toast.LENGTH_SHORT).show()
             }
     }
-
-    // Fungsi untuk menyaring daftar lokal tanpa memanggil database lagi
     private fun filterData(query: String) {
         displayListPelanggan.clear()
 
@@ -116,7 +106,6 @@ class CariUpdatePelangganActivity : AppCompatActivity() {
         } else {
             val q = query.uppercase()
             for (pelanggan in masterListPelanggan) {
-                // Saring jika ID atau Nama mengandung ketikan CS
                 if (pelanggan.id.uppercase().contains(q) || pelanggan.nama.uppercase().contains(q)) {
                     displayListPelanggan.add(pelanggan)
                 }
@@ -155,8 +144,6 @@ class CariUpdatePelangganActivity : AppCompatActivity() {
                 Toast.makeText(this, "Pembaruan profil sukses!", Toast.LENGTH_SHORT).show()
                 binding.layoutData.visibility = View.GONE
                 binding.etSearch.text?.clear()
-
-                // Segarkan data tabel dari awal agar update terbaru terlihat
                 loadSemuaDataPelanggan()
             }
     }

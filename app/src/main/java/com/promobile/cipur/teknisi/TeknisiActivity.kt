@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.teknisi
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,17 +6,21 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.promobile.cipur.databinding.ActivityTeknisiBinding
+import com.promobile.cipur.teknisi.CekOdpActivity
+import com.promobile.cipur.teknisi.InstalasiActivity
+import com.promobile.cipur.teknisi.MintaBarangActivity
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.TeknisiActivityMainBinding
 
 class TeknisiActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityTeknisiBinding
+    private lateinit var binding: TeknisiActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityTeknisiBinding.inflate(layoutInflater)
+        binding = TeknisiActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
