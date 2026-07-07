@@ -16,10 +16,10 @@ Proyek ini merupakan tugas besar mata kuliah **Pemrograman Mobile 1** yang diker
 ### Anggota Kelompok
 
 | No  | Nama                    |
-| --- | ----------------------- |
+| --- |-------------------------|
 | 1   | Adrian Fathurahman      |
 | 2   | Andrian Maulana Dzikwan |
-| 3   | Fahrizal                |
+| 3   | Fahridzal Nur Sidiq     |
 | 4   | Muhammad Rifaldy        |
 
 ### Teknologi yang Digunakan
