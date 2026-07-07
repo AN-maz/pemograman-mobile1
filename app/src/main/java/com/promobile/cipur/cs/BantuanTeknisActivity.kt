@@ -1,5 +1,6 @@
-package com.promobile.cipur
+package com.promobile.cipur.cs
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,11 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
-import com.promobile.cipur.databinding.ActivityBantuanTeknisBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.CsActivityBantuanTeknisBinding
 
 class BantuanTeknisActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityBantuanTeknisBinding
+    private lateinit var binding: CsActivityBantuanTeknisBinding
     private val db = FirebaseFirestore.getInstance()
 
     private val listPelangganDisplay = mutableListOf<String>()
@@ -24,7 +26,7 @@ class BantuanTeknisActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityBantuanTeknisBinding.inflate(layoutInflater)
+        binding = CsActivityBantuanTeknisBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -71,7 +73,11 @@ class BantuanTeknisActivity : AppCompatActivity() {
                     val nama = doc.getString("nama") ?: "Tanpa Nama"
                     listPelangganDisplay.add("${doc.id} - $nama")
                 }
-                val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, listPelangganDisplay)
+                val adapter = ArrayAdapter(
+                    this,
+                    android.R.layout.simple_dropdown_item_1line,
+                    listPelangganDisplay
+                )
                 binding.etPelanggan.setAdapter(adapter)
             }
     }
@@ -87,25 +93,22 @@ class BantuanTeknisActivity : AppCompatActivity() {
         binding.btnCekKoneksi.isEnabled = false
         binding.layoutStatus.visibility = View.VISIBLE
         binding.tvStatus.text = "Sedang menghubungi perangkat..."
-        binding.tvStatus.setTextColor(android.graphics.Color.GRAY)
+        binding.tvStatus.setTextColor(Color.GRAY)
 
         Handler(Looper.getMainLooper()).postDelayed({
             binding.btnCekKoneksi.isEnabled = true
 
-            // Simulasi Probabilitas Kasus
             val peluang = Math.random()
 
             if (peluang < 0.2) {
-                // Exceptional Flow 3E: Gagal Komunikasi
                 binding.tvStatus.text = "Error: Sistem gagal berkomunikasi dengan perangkat (Infrastruktur Terputus)"
-                binding.tvStatus.setTextColor(android.graphics.Color.RED)
+                binding.tvStatus.setTextColor(Color.RED)
 
                 binding.btnRestart.visibility = View.GONE
                 binding.btnTiketTeknisi.visibility = View.VISIBLE
             } else {
-                // Normal Flow: Perangkat Merespons
                 binding.tvStatus.text = "Perangkat Online, namun terdeteksi penurunan kualitas (Redaman Tinggi)"
-                binding.tvStatus.setTextColor(android.graphics.Color.parseColor("#FF9800")) // Orange
+                binding.tvStatus.setTextColor(Color.parseColor("#FF9800")) // Orange
 
                 binding.btnRestart.visibility = View.VISIBLE
                 binding.btnTiketTeknisi.visibility = View.GONE
@@ -116,22 +119,20 @@ class BantuanTeknisActivity : AppCompatActivity() {
     private fun jalankanPemulihanJarakJauh() {
         binding.btnRestart.isEnabled = false
         binding.tvStatus.text = "Sistem mengeksekusi instruksi pemulihan jarak jauh (Restarting...)"
-        binding.tvStatus.setTextColor(android.graphics.Color.GRAY)
+        binding.tvStatus.setTextColor(Color.GRAY)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val berhasilPulih = Math.random() > 0.4 // 60% peluang sukses
+            val berhasilPulih = Math.random() > 0.4
 
             if (berhasilPulih) {
-                // Skenario 5: Layanan kembali normal
                 binding.tvStatus.text = "Status: Layanan Kembali Normal / Stabil"
-                binding.tvStatus.setTextColor(android.graphics.Color.parseColor("#4CAF50")) // Hijau
+                binding.tvStatus.setTextColor(Color.parseColor("#4CAF50")) // Hijau
 
                 binding.btnRestart.visibility = View.GONE
                 binding.btnTutupLaporan.visibility = View.VISIBLE
             } else {
-                // Alternate Flow 4A: Masih gangguan
                 binding.tvStatus.text = "Status: Pemulihan gagal, gangguan masih terjadi"
-                binding.tvStatus.setTextColor(android.graphics.Color.RED)
+                binding.tvStatus.setTextColor(Color.RED)
 
                 binding.btnRestart.visibility = View.GONE
                 binding.btnTiketTeknisi.visibility = View.VISIBLE
@@ -145,8 +146,6 @@ class BantuanTeknisActivity : AppCompatActivity() {
             "aktivitas" to "Diagnosis & Restart Jarak Jauh Sukses",
             "timestamp" to System.currentTimeMillis()
         )
-
-        // Skenario 6: Mencatat log operasional
         db.collection("log_operasional").add(logData)
             .addOnSuccessListener {
                 Toast.makeText(this, "Laporan ditutup. Log operasional tersimpan.", Toast.LENGTH_LONG).show()

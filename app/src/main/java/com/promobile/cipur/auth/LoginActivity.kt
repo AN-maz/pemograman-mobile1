@@ -1,22 +1,28 @@
-package com.promobile.cipur
+package com.promobile.cipur.auth
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.promobile.cipur.databinding.ActivityLoginBinding
 import android.content.Intent
+import com.google.firebase.firestore.FirebaseFirestore
+import com.promobile.cipur.cs.CsActivity
+import com.promobile.cipur.databinding.AuthActivityLoginBinding
+import com.promobile.cipur.finance.FinanceActivity
+import com.promobile.cipur.logistik.LogistikActivity
+import com.promobile.cipur.noc.NocActivity
+import com.promobile.cipur.teknisi.TeknisiActivity
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: AuthActivityLoginBinding
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = AuthActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
         binding.btnLogin.setOnClickListener {
@@ -57,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
 
                     if (userId != null) {
                         binding.progressBar.visibility = View.VISIBLE
-                        val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                        val db = FirebaseFirestore.getInstance()
                         db.collection("pegawai").document(userId).get()
                             .addOnSuccessListener { document ->
                                 binding.progressBar.visibility = View.GONE

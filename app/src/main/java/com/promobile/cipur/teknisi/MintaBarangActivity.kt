@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.teknisi
 
 import android.os.Bundle
 import android.view.View
@@ -9,18 +9,19 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.promobile.cipur.databinding.ActivityMintaBarangBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.TeknisiActivityMintaBarangBinding
 
 class MintaBarangActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMintaBarangBinding
+    private lateinit var binding: TeknisiActivityMintaBarangBinding
     private val db = FirebaseFirestore.getInstance()
     private val BATAS_STANDAR = 5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityMintaBarangBinding.inflate(layoutInflater)
+        binding = TeknisiActivityMintaBarangBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

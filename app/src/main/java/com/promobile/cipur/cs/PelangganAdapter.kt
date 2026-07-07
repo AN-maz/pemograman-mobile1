@@ -1,10 +1,11 @@
-package com.promobile.cipur
+package com.promobile.cipur.cs
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.promobile.cipur.R
 
 data class Pelanggan(
     val id: String,
@@ -25,7 +26,7 @@ class PelangganAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_pelanggan, parent, false)
+            .inflate(R.layout.cs_item_pelanggan, parent, false)
         return ViewHolder(view)
     }
 

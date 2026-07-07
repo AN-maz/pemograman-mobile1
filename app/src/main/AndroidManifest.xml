@@ -13,7 +13,7 @@
         android:theme="@style/Theme.MyApplication">
 
         <!-- LoginActivity tetap punya intent-filter agar terbuka pertama kali -->
-        <activity android:name=".LoginActivity" android:exported="true">
+        <activity android:name=".auth.LoginActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -22,32 +22,32 @@
 
         <!-- MainActivity HAPUS intent-filter dari sini -->
         <activity
-            android:name=".MainActivity"
+            android:name=".auth.MainActivity"
             android:exported="false">
         </activity>
 
-        <activity android:name=".TeknisiActivity" android:exported="false" />
-        <activity android:name=".CekOdpActivity" android:exported="false" />
-        <activity android:name=".MintaBarangActivity" android:exported="false" />
-        <activity android:name=".InstalasiActivity" android:exported="false" />
+        <activity android:name=".teknisi.TeknisiActivity" android:exported="false" />
+        <activity android:name=".teknisi.CekOdpActivity" android:exported="false" />
+        <activity android:name=".teknisi.MintaBarangActivity" android:exported="false" />
+        <activity android:name=".teknisi.InstalasiActivity" android:exported="false" />
 
 
-        <activity android:name=".LogistikActivity" />
-        <activity android:name=".SiapBarangActivity" android:exported="false" />
-        <activity android:name=".BeliBarangActivity" android:exported="false" />
-        <activity android:name=".MonitoringLogistikActivity" android:exported="false" />
+        <activity android:name=".logistik.LogistikActivity" />
+        <activity android:name=".logistik.SiapBarangActivity" android:exported="false" />
+        <activity android:name=".logistik.BeliBarangActivity" android:exported="false" />
+        <activity android:name=".logistik.MonitoringLogistikActivity" android:exported="false" />
 
-        <activity android:name=".FinanceActivity" android:exported="false" />
-        <activity android:name=".ApprovalPrActivity" android:exported="false" />
-        <activity android:name=".ValidasiPembayaranActivity" android:exported="false" />
+        <activity android:name=".finance.FinanceActivity" android:exported="false" />
+        <activity android:name=".finance.ApprovalPrActivity" android:exported="false" />
+        <activity android:name=".finance.ValidasiPembayaranActivity" android:exported="false" />
 
-        <activity android:name=".NocActivity" android:exported="false" />
-        <activity android:name=".AktivasiNocActivity" android:exported="false" />
+        <activity android:name=".noc.NocActivity" android:exported="false" />
+        <activity android:name=".noc.AktivasiNocActivity" android:exported="false" />
 
-        <activity android:name=".CsActivity" android:exported="false" />
-        <activity android:name=".CariUpdatePelangganActivity" android:exported="false" />
-        <activity android:name=".TiketKeluhanActivity" android:exported="false" />
-        <activity android:name=".BantuanTeknisActivity" android:exported="false" />
+        <activity android:name=".cs.CsActivity" android:exported="false" />
+        <activity android:name=".cs.CariUpdatePelangganActivity" android:exported="false" />
+        <activity android:name=".cs.TiketKeluhanActivity" android:exported="false" />
+        <activity android:name=".cs.BantuanTeknisActivity" android:exported="false" />
 
     </application>
 

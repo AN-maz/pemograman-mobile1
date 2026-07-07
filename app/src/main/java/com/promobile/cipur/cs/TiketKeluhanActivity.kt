@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.cs
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -8,22 +8,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
-import com.promobile.cipur.databinding.ActivityTiketKeluhanBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.CsActivityTiketBinding
 
 class TiketKeluhanActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityTiketKeluhanBinding
+    private lateinit var binding: CsActivityTiketBinding
     private val db = FirebaseFirestore.getInstance()
 
-    // Untuk menyimpan daftar "ID - Nama"
     private val listPelangganDisplay = mutableListOf<String>()
-    // Untuk mengingat ID asli yang dipilih CS
     private var selectedIdPelanggan = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityTiketKeluhanBinding.inflate(layoutInflater)
+        binding = CsActivityTiketBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -32,24 +31,19 @@ class TiketKeluhanActivity : AppCompatActivity() {
             insets
         }
 
-        // 1. Muat data pelanggan untuk Dropdown
         loadDataPelanggan()
 
-        // 2. Tangkap kejadian saat CS mengklik salah satu nama di dropdown
         binding.etPelanggan.setOnItemClickListener { parent, _, position, _ ->
             val textTerpilih = parent.getItemAtPosition(position).toString()
 
-            // Teks berbentuk "PLG-001 - Budi", kita potong dan ambil sebelum " -"
             selectedIdPelanggan = textTerpilih.substringBefore(" -")
         }
 
-        // 3. Tombol Kirim Tiket
         binding.btnKirimTiket.setOnClickListener {
             val inputText = binding.etPelanggan.text.toString()
             val kategori = binding.etKategori.text.toString().trim()
             val keluhan = binding.etKeluhan.text.toString().trim()
 
-            // Validasi apakah CS benar-benar memilih dari daftar, bukan asal ngetik
             if (selectedIdPelanggan.isEmpty() || !inputText.contains(selectedIdPelanggan)) {
                 Toast.makeText(this, "Silakan pilih nama pelanggan dari daftar saran (dropdown)", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
@@ -72,12 +66,14 @@ class TiketKeluhanActivity : AppCompatActivity() {
                 for (doc in documents) {
                     val nama = doc.getString("nama") ?: "Tanpa Nama"
                     val id = doc.id
-                    // Gabungkan ID dan Nama agar mudah dicari CS
                     listPelangganDisplay.add("$id - $nama")
                 }
 
-                // Masukkan daftar ke dalam AutoCompleteTextView
-                val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, listPelangganDisplay)
+                val adapter = ArrayAdapter(
+                    this,
+                    android.R.layout.simple_dropdown_item_1line,
+                    listPelangganDisplay
+                )
                 binding.etPelanggan.setAdapter(adapter)
             }
             .addOnFailureListener {
@@ -86,7 +82,7 @@ class TiketKeluhanActivity : AppCompatActivity() {
     }
 
     private fun buatTiketOtomatis(idPlg: String, kategori: String, keluhan: String) {
-        binding.btnKirimTiket.isEnabled = false // Matikan tombol agar tidak dobel klik
+        binding.btnKirimTiket.isEnabled = false
 
         val noTiket = "CMP-${System.currentTimeMillis().toString().takeLast(5)}"
         val tiketData = hashMapOf(
@@ -101,7 +97,7 @@ class TiketKeluhanActivity : AppCompatActivity() {
             .set(tiketData)
             .addOnSuccessListener {
                 Toast.makeText(this, "Sukses! Tiket $noTiket berhasil dibuat.", Toast.LENGTH_LONG).show()
-                finish() // Kembali ke dashboard CS
+                finish() 
             }
             .addOnFailureListener {
                 binding.btnKirimTiket.isEnabled = true

@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.logistik
 
 import android.os.Bundle
 import android.widget.Toast
@@ -7,17 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
-import com.promobile.cipur.databinding.ActivityBeliBarangBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.LogistikActivityBeliBinding
 
 class BeliBarangActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityBeliBarangBinding
+    private lateinit var binding: LogistikActivityBeliBinding
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityBeliBarangBinding.inflate(layoutInflater)
+        binding = LogistikActivityBeliBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

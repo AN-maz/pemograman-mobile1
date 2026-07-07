@@ -1,4 +1,4 @@
-package com.promobile.cipur
+package com.promobile.cipur.noc
 
 import android.content.Intent
 import android.net.Uri
@@ -13,12 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
-import com.promobile.cipur.databinding.ActivityAktivasiNocBinding
+import com.promobile.cipur.R
+import com.promobile.cipur.databinding.NocActivityAktivasiBinding
 import java.net.URLEncoder
 
 class AktivasiNocActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAktivasiNocBinding
+    private lateinit var binding: NocActivityAktivasiBinding
     private val db = FirebaseFirestore.getInstance()
     private val listDataTiket = mutableListOf<Pair<String, String>>()
     private var selectedTiketId: String? = null
@@ -27,7 +28,7 @@ class AktivasiNocActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityAktivasiNocBinding.inflate(layoutInflater)
+        binding = NocActivityAktivasiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
