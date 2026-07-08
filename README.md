@@ -4,7 +4,7 @@
 
 ### Deskripsi Proyek
 
-Proyek ini merupakan tugas besar mata kuliah **Pemrograman Mobile 1** yang dikerjakan secara berkelompok oleh 4 mahasiswa. Aplikasi ini dikembangkan untuk mengimplementasikan konsep-konsep pemrograman mobile yang telah dipelajari selama perkuliahan, seperti desain antarmuka, navigasi, manajemen data, dan fitur-fitur mobile lainnya.
+Proyek ini adalah merupakan tugas besar mata kuliah **Pemrograman Mobile 1** yang dikerjakan secara berkelompok oleh 4 mahasiswa. Aplikasi ini dikembangkan untuk mengimplementasikan konsep-konsep pemrograman mobile yang telah dipelajari selama perkuliahan, seperti desain antarmuka, navigasi, manajemen data, dan fitur-fitur mobile lainnya.
 
 ### Tujuan Proyek
 
