@@ -5,60 +5,182 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F6F9"
     android:padding="24dp">
 
+    <!-- Header Section -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Buat Tiket Keluhan"
-        android:textSize="22sp"
+        android:textColor="#1A1C1E"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Kolom Pencarian Pintar -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilPelanggan"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Cari data pelanggan dan catat keluhan teknis secara detail."
+        android:textColor="#6C757D"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <!-- Form Container Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        android:hint="Cari Pelanggan (Ketik Nama / ID)">
+        android:layout_marginTop="28dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:strokeWidth="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_end_toEndOf="parent">
 
-        <AutoCompleteTextView
-            android:id="@+id/etPelanggan"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:completionThreshold="1" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:padding="20dp">
 
-    <EditText
-        android:id="@+id/etKategori"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Kategori (contoh: Jaringan Lemot / Tagihan)"
-        app:layout_constraintTop_toBottomOf="@+id/tilPelanggan"
-        android:layout_marginTop="16dp" />
+            <!-- INPUT 1: CARI PELANGGAN -->
+            <ImageView
+                android:id="@+id/ivPelangganIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_blue_approval_container"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="#1E88E5"
+                app:layout_constraintBottom_toBottomOf="@id/tilPelanggan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tilPelanggan" />
 
-    <EditText
-        android:id="@+id/etKeluhan"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:hint="Deskripsikan detail keluhan pelanggan..."
-        android:gravity="top|start"
-        android:inputType="textMultiLine"
-        app:layout_constraintTop_toBottomOf="@+id/etKategori"
-        android:layout_marginTop="16dp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPelanggan"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:hint="Cari Pelanggan (Nama / ID)"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivPelangganIcon"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btnKirimTiket"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Kirim Tiket Keluhan"
-        app:layout_constraintTop_toBottomOf="@+id/etKeluhan"
-        android:layout_marginTop="24dp" />
+                <AutoCompleteTextView
+                    android:id="@+id/etPelanggan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="1"
+                    android:inputType="text"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- INPUT 2: KATEGORI -->
+            <ImageView
+                android:id="@+id/ivKategoriIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_blue_approval_container"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                app:tint="#1E88E5"
+                app:layout_constraintBottom_toBottomOf="@id/tilKategori"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tilKategori" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilKategori"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:hint="Kategori Keluhan"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivKategoriIcon"
+                app:layout_constraintTop_toBottomOf="@+id/tilPelanggan">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etKategori"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- INPUT 3: DETAIL KELUHAN -->
+            <ImageView
+                android:id="@+id/ivKeluhanIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_blue_approval_container"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_menu_edit"
+                app:tint="#1E88E5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tilKeluhan" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilKeluhan"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:hint="Deskripsi Detail Keluhan"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivKeluhanIcon"
+                app:layout_constraintTop_toBottomOf="@+id/tilKategori">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etKeluhan"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- SUBMIT BUTTON -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnKirimTiket"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="28dp"
+                android:text="Kirim Tiket Keluhan"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="#1E88E5"
+                app:cornerRadius="12dp"
+                app:layout_constraintTop_toBottomOf="@id/tilKeluhan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_end_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
