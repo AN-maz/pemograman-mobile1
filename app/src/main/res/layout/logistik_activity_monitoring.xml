@@ -3,105 +3,191 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F2F5">
+    android:background="#F4F6F9">
 
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="24dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="Monitoring Gudang"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#333333"
-            android:layout_marginBottom="24dp"
-            android:layout_marginTop="16dp"/>
+            android:textColor="#1A1C1E"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
-        <androidx.cardview.widget.CardView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="28dp"
+            android:text="Pantau real-time permintaan, keuangan, dan stok."
+            android:textColor="#6C757D"
+            android:textSize="13sp" />
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
-            <LinearLayout
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/ivIconTeknisi"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_monitoring_blue_container"
+                    android:padding="10dp"
+                    android:src="@android:drawable/ic_menu_directions"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#2196F3" />
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvTitleTeknisi"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="🚨 Permintaan Teknisi (Menunggu)"
+                    android:layout_marginStart="14dp"
+                    android:text="Permintaan Teknisi (Menunggu)"
+                    android:textColor="#1A1C1E"
+                    android:textSize="15sp"
                     android:textStyle="bold"
-                    android:textColor="#2196F3"
-                    android:layout_marginBottom="8dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivIconTeknisi"
+                    app:layout_constraintTop_toTopOf="@id/ivIconTeknisi" />
+
                 <TextView
                     android:id="@+id/tvListPermintaan"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="Memuat data..."
-                    android:textSize="14sp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    android:textColor="#6C757D"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tvTitleTeknisi"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleTeknisi" />
 
-        <androidx.cardview.widget.CardView
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
-            <LinearLayout
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/ivIconFinance"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_monitoring_red_container"
+                    android:padding="10dp"
+                    android:src="@android:drawable/ic_dialog_alert"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#F44336" />
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvTitleFinance"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="⚠️ Status PR Finance (Perhatian)"
+                    android:layout_marginStart="14dp"
+                    android:text="Status PR Finance (Perhatian)"
+                    android:textColor="#1A1C1E"
+                    android:textSize="15sp"
                     android:textStyle="bold"
-                    android:textColor="#F44336"
-                    android:layout_marginBottom="8dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivIconFinance"
+                    app:layout_constraintTop_toTopOf="@id/ivIconFinance" />
+
                 <TextView
                     android:id="@+id/tvListFinance"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="Memuat data..."
-                    android:textSize="14sp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    android:textColor="#6C757D"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tvTitleFinance"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleFinance" />
 
-        <androidx.cardview.widget.CardView
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
-            <LinearLayout
+            android:layout_marginBottom="24dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/ivIconStok"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_monitoring_green_container"
+                    android:padding="10dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#4CAF50" />
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvTitleStok"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="📦 Ketersediaan Stok Gudang"
+                    android:layout_marginStart="14dp"
+                    android:text="Ketersediaan Stok Gudang"
+                    android:textColor="#1A1C1E"
+                    android:textSize="15sp"
                     android:textStyle="bold"
-                    android:textColor="#4CAF50"
-                    android:layout_marginBottom="8dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivIconStok"
+                    app:layout_constraintTop_toTopOf="@id/ivIconStok" />
+
                 <TextView
                     android:id="@+id/tvListStok"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="Memuat data..."
-                    android:textSize="14sp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    android:textColor="#6C757D"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tvTitleStok"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleStok" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 </ScrollView>
