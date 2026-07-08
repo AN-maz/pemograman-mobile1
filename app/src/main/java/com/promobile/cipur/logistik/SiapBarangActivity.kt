@@ -15,7 +15,9 @@ class SiapBarangActivity : AppCompatActivity() {
 
     private lateinit var binding: LogistikActivitySiapBarangBinding
     private val db = FirebaseFirestore.getInstance()
-    private val listDataManifes = mutableListOf<Map<String, Any>>()
+
+    private val listDataInventaris = mutableListOf<Pair<String, Long>>()
+    private var selectedIndex: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,55 +31,66 @@ class SiapBarangActivity : AppCompatActivity() {
             insets
         }
 
-        loadDataAntrean()
+        loadDataInventaris()
 
         binding.etManifes.setOnItemClickListener { _, _, position, _ ->
-            val dataTerpilih = listDataManifes[position]
-            binding.etNamaBarang.setText(dataTerpilih["namaMaterial"].toString())
-            binding.etQty.setText(dataTerpilih["jumlah"].toString())
+            selectedIndex = position
+            val dataTerpilih = listDataInventaris[position]
+            binding.etNamaBarang.setText(dataTerpilih.first)
+            binding.etQty.setText(dataTerpilih.second.toString())
         }
 
         binding.btnProsesPenyerahan.setOnClickListener {
-            val manifes = binding.etManifes.text.toString().trim()
             val namaBarang = binding.etNamaBarang.text.toString().trim()
             val qty = binding.etQty.text.toString().toIntOrNull() ?: 0
 
-            if (manifes.isEmpty() || namaBarang.isEmpty() || qty <= 0) {
+            if (selectedIndex < 0 || selectedIndex >= listDataInventaris.size) {
+                Toast.makeText(this, "Pilih barang terlebih dahulu dari daftar", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (namaBarang.isEmpty() || qty <= 0) {
                 Toast.makeText(this, "Data tidak lengkap atau belum dipilih", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            prosesStokBarang(manifes, namaBarang, qty)
+            prosesStokBarang(namaBarang, qty)
         }
     }
 
-    private fun loadDataAntrean() {
-        db.collection("antrean_logistik")
-            .whereEqualTo("statusAntrean", "Menunggu Persetujuan Logistik")
+    private fun loadDataInventaris() {
+        // Ambil data dari database_inventaris: barang yang sudah tersimpan di database
+        db.collection("database_inventaris")
             .get()
             .addOnSuccessListener { documents ->
-                listDataManifes.clear()
-                val nomorManifesList = mutableListOf<String>()
+                listDataInventaris.clear()
+                val listNamaBarang = mutableListOf<String>()
 
                 for (document in documents) {
-                    val data = document.data
-                    listDataManifes.add(data)
-                    data["nomorManifes"]?.let { nomorManifesList.add(it.toString()) }
+                    val namaBarang = document.id
+                    val stok = document.getLong("stok") ?: 0
+
+                    listDataInventaris.add(Pair(namaBarang, stok))
+                    listNamaBarang.add("$namaBarang (Stok: $stok)")
                 }
 
                 val adapter = ArrayAdapter(
                     this,
                     android.R.layout.simple_dropdown_item_1line,
-                    nomorManifesList
+                    listNamaBarang
                 )
                 binding.etManifes.setAdapter(adapter)
+
+                if (listNamaBarang.isEmpty()) {
+                    Toast.makeText(this, "Database inventaris kosong", Toast.LENGTH_SHORT).show()
+                }
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Gagal menarik data antrean", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Gagal memuat data inventaris", Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun prosesStokBarang(manifes: String, barang: String, qtyKeluar: Int) {
+    private fun prosesStokBarang(barang: String, qtyKeluar: Int) {
         binding.btnProsesPenyerahan.isEnabled = false
 
         db.collection("database_inventaris").document(barang).get()
@@ -90,7 +103,7 @@ class SiapBarangActivity : AppCompatActivity() {
                         binding.btnProsesPenyerahan.isEnabled = true
                     } else {
                         val stokTerbaru = stokSaatIni - qtyKeluar
-                        updateStokDatabase(manifes, barang, stokTerbaru)
+                        updateStokDatabase(barang, stokTerbaru)
                     }
                 } else {
                     Toast.makeText(this, "Error: $barang tidak terdaftar di database inventaris", Toast.LENGTH_LONG).show()
@@ -103,13 +116,10 @@ class SiapBarangActivity : AppCompatActivity() {
             }
     }
 
-    private fun updateStokDatabase(manifes: String, barang: String, stokTerbaru: Int) {
+    private fun updateStokDatabase(barang: String, stokTerbaru: Int) {
         db.collection("database_inventaris").document(barang)
             .update("stok", stokTerbaru)
             .addOnSuccessListener {
-                db.collection("antrean_logistik").document(manifes)
-                    .update("statusAntrean", "Selesai Diserahkan")
-
                 Toast.makeText(this, "Penyerahan sukses & Stok Terupdate!", Toast.LENGTH_LONG).show()
                 finish()
             }
@@ -119,3 +129,4 @@ class SiapBarangActivity : AppCompatActivity() {
             }
     }
 }
+

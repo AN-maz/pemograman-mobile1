@@ -34,11 +34,14 @@ class MonitoringLogistikActivity : AppCompatActivity() {
 
     private fun muatDataPermintaanTeknisi() {
         db.collection("antrean_logistik")
-            .whereEqualTo("statusAntrean", "Menunggu Persetujuan Logistik")
+            .whereIn("statusAntrean", listOf(
+                "Menunggu Persetujuan Logistik",
+                "Disetujui Finance"
+            ))
             .get()
             .addOnSuccessListener { documents ->
                 if (documents.isEmpty) {
-                    binding.tvListPermintaan.text = "✅ Tidak ada antrean permintaan Teknisi."
+                    binding.tvListPermintaan.text = "✅ Tidak ada antrean permintaan saat ini."
                     return@addOnSuccessListener
                 }
 
@@ -47,7 +50,9 @@ class MonitoringLogistikActivity : AppCompatActivity() {
                     val manifes = doc.getString("nomorManifes") ?: "-"
                     val material = doc.getString("namaMaterial") ?: "-"
                     val jumlah = doc.getLong("jumlah") ?: 0
-                    sb.append("• [$manifes] $material (Qty: $jumlah)\n")
+                    val status = doc.getString("statusAntrean") ?: "-"
+                    val badge = if (status == "Disetujui Finance") "💰" else "🔧"
+                    sb.append("$badge [$manifes] $material (Qty: $jumlah) — $status\n")
                 }
                 binding.tvListPermintaan.text = sb.toString().trim()
             }
