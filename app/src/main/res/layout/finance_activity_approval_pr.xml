@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:padding="20dp">
 
+            <!-- Combobox: Pilih PR -->
             <ImageView
                 android:id="@+id/ivPrIcon"
                 android:layout_width="40dp"
@@ -85,6 +86,44 @@
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Nama Barang (Read-only, auto-fill) -->
+            <ImageView
+                android:id="@+id/ivNamaIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_blue_approval_container"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_menu_gallery"
+                app:tint="#1E88E5"
+                app:layout_constraintBottom_toBottomOf="@id/tilNamaBarang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tilNamaBarang" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNamaBarang"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:hint="Nama Barang"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivNamaIcon"
+                app:layout_constraintTop_toBottomOf="@+id/tilPr">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamaBarang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Qty (Read-only) -->
             <ImageView
                 android:id="@+id/ivQtyIcon"
                 android:layout_width="40dp"
@@ -111,13 +150,13 @@
                 app:boxCornerRadiusTopStart="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivQtyIcon"
-                app:layout_constraintTop_toBottomOf="@+id/tilPr">
+                app:layout_constraintTop_toBottomOf="@+id/tilNamaBarang">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etQty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
+                    android:enabled="false"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 

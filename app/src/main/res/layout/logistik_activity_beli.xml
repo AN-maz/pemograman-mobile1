@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:padding="20dp">
 
+            <!-- Combobox: Pilih Barang dari Database -->
             <ImageView
                 android:id="@+id/ivBarangIcon"
                 android:layout_width="40dp"
@@ -64,11 +65,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilBarangPr"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:hint="Rincian Nama Barang"
+                android:hint="Pilih Barang dari Antrean"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
@@ -77,14 +78,52 @@
                 app:layout_constraintStart_toEndOf="@id/ivBarangIcon"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:id="@+id/etBarangPr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="none"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Nama Barang (Read-only, auto-fill) -->
+            <ImageView
+                android:id="@+id/ivNamaIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_logistic_icon_container"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_menu_gallery"
+                app:tint="#0288D1"
+                app:layout_constraintBottom_toBottomOf="@id/tilNamaBarang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tilNamaBarang" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNamaBarang"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:hint="Nama Barang"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivNamaIcon"
+                app:layout_constraintTop_toBottomOf="@id/tilBarangPr">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamaBarang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Qty (Read-only, auto-fill) -->
             <ImageView
                 android:id="@+id/ivQtyIcon"
                 android:layout_width="40dp"
@@ -103,20 +142,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="20dp"
-                android:hint="Jumlah / Qty Pembelian"
+                android:layout_marginTop="16dp"
+                android:hint="Stok Tersedia (Qty)"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivQtyIcon"
-                app:layout_constraintTop_toBottomOf="@id/tilBarangPr">
+                app:layout_constraintTop_toBottomOf="@id/tilNamaBarang">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etQtyPr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:inputType="number"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
