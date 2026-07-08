@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btnStart"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_end_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_chainStyle="packed">
 
         <ImageView
@@ -39,7 +39,7 @@
             android:textColor="#1A1C1E"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:textAlign="center"/>
+            android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/tvAppDescription"
@@ -68,7 +68,7 @@
         app:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_end_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
