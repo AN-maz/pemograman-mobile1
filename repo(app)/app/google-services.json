@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "80255834931",
+    "project_id": "cifo-op",
+    "storage_bucket": "cifo-op.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80255834931:android:25476577d7e5478f36bc46",
+        "android_client_info": {
+          "package_name": "com.promobile.cipur"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf_Q5UyWzia3Vx9xdw3n16EK_z_OusIa4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

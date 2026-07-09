@@ -13,14 +13,14 @@ Proyek ini adalah merupakan tugas besar mata kuliah **Pemrograman Mobile 1** yan
 - Menghasilkan aplikasi yang fungsional dan mudah digunakan.
 - Mengimplementasikan praktik pengembangan perangkat lunak yang baik.
 
-### Anggota Kelompok
+## Anggota Kelompok
 
-| No  | Nama                    |
-| --- |-------------------------|
-| 1   | Adrian Fathurahman      |
-| 2   | Andrian Maulana Dzikwan |
-| 3   | Fahridzal Nur Sidiq     |
-| 4   | Muhammad Rifaldy        |
+| No  | Nama                    | NIM          | Role    
+| --- |-------------------------|--------------|---------
+| 1   | Adrian Fathurahman      | 24552011106  | UI/UX Engineer 
+| 2   | Andrian Maulana Dzikwan | 24552011027  | Developer & Tester 
+| 3   | Fahridzal Nur Sidiq     | 24552011315  | UI/UX Engineer 
+| 4   | Muhammad Rifaldy        | 24552011288  | UI/UX Engineer 
 
 ### Teknologi yang Digunakan
 
@@ -31,53 +31,57 @@ Proyek ini adalah merupakan tugas besar mata kuliah **Pemrograman Mobile 1** yan
 - Git & GitHub
 
 ---
+## Dokumentasi Use Case
 
-# Use Case Diagram
-
-### 1. Sistem Internal
-![Sistem Internal](UC/sistem-internal.png)
-
-### 2. Sistem Operasional
-![Sistem Operasional](UC/sistem-operasional.png)
-
-### 3. Sistem Visit Track
-![Sistem Visit Track](UC/sistem-visit-track.png)
-
-### 4. Sistem Super Apps
-![Sistem Super Apps](UC/sistem-super-apps.png)
+| Sistem Internal | Sistem Operasional 
+| :---: | :---: 
+| ![Internal](UC/sistem-internal.png) | ![Operasional](UC/sistem-operasional.png) | 
+| Visit Track | Super Apps |
+| :---: | :---: |
+![Visit Track](UC/sistem-visit-track.png) | ![Super Apps](UC/sistem-super-apps.png) |
 
 ---
 
-### Standar Penamaan Branch
+## Dokumentasi Screenshot
 
-#### - `feature/nama-fitur` (untuk membuat fitur baru)
-#### - `bugfix/nama-bug` (untuk memperbaiki error)
-#### - `chore/nama-tugas` (untuk tugas teknis non-fitur, seperti pengaturan library)
+| Customer Service | Finance | Login |
+| :---: | :---: | :---: |
+| ![CS](SS/cs.jpeg) | ![Finance](SS/finance.jpeg) | ![Login](SS/login.jpeg) |
 
-### Siklus Kerja Member
-Setiap kali ingin membuat fitur baru, alurnya:
-#### Langkah A: Pindah ke branch `testing` (bukan `main`), lalu ambil kode terbaru
-
-```bash
-git checkout testing
-git pull origin testing
-```
-
-#### Langkah B: Buat branch fitur baru dari branch `testing` tersebut.
-```bash
-git checkout -b fitur/login
-```
-
-#### Langkah C: Coding di Android Studio sampai fiturnya selesai. Jika sudah selesai, lakukan `commit`.
-```bash
-git add .
-git commit -m "menyelesaikan fitur login"
-```
-
-#### Langkah D: Push branch fitur tersebut ke GitHub.
-```bash
-git push origin fitur/login
-```
+| Logistik | Teknisi |
+| :---: | :---: |
+| ![Logistik](SS/logisitik.jpeg) | ![Teknisi](SS/teknisi.jpeg) |
 
 ---
-Text baru 
+
+Tentu, ini adalah versi yang lebih rapi dan profesional untuk bagian "Cara Menjalankan Project" di `README.md` Anda. Saya menggunakan format *bullet points* dan *code blocks* agar instruksinya lebih mudah dibaca:
+
+---
+
+## Cara Menjalankan Project
+
+Ikuti langkah-langkah berikut untuk menjalankan aplikasi di perangkat Anda:
+
+### 1. Kloning Repository
+
+Buka terminal pada direktori yang Anda inginkan, lalu jalankan perintah berikut:
+
+```bash
+git clone [MASUKKAN_LINK_REPO_ANDA_DISINI]
+
+```
+
+### 2. Membuka di Android Studio
+
+Setelah proses *cloning* selesai, silakan buka project dengan cara:
+
+1. Buka aplikasi **Android Studio**.
+2. Pilih menu **File > Open**.
+3. Navigasikan ke folder `repo(app)` yang telah Anda kloning sebelumnya.
+4. Tunggu hingga proses sinkronisasi Gradle selesai.
+5. Klik tombol **Run** (ikon segitiga hijau) untuk menjalankan aplikasi pada emulator atau perangkat fisik.
+
+---
+ 
+ ## Link Demo YT
+ 
