@@ -84,5 +84,6 @@ Setelah proses *cloning* selesai, silakan buka project dengan cara:
 
 ---
  
- ## Link Demo YT
+ ## Link Demo dan penjelasan
+ https://drive.google.com/drive/folders/14u_cGDvckPWm9KfAXz2s3vrr6RXKwqog
  
