@@ -33,9 +33,10 @@ Proyek ini adalah merupakan tugas besar mata kuliah **Pemrograman Mobile 1** yan
 ---
 ## Dokumentasi Use Case
 
-| Sistem Internal | Sistem Operasional 
+| Sistem Internal | Sistem Operasional |
 | :---: | :---: 
 | ![Internal](UC/sistem-internal.png) | ![Operasional](UC/sistem-operasional.png) | 
+
 | Visit Track | Super Apps |
 | :---: | :---: |
 ![Visit Track](UC/sistem-visit-track.png) | ![Super Apps](UC/sistem-super-apps.png) |
